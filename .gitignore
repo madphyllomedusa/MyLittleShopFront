@@ -21,3 +21,7 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+/src/plugins/webfontloader.js
+jsconfig.json
+package-lock.json
