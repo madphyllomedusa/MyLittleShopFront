@@ -1,4 +1,5 @@
 <template>
+  <AppToolBar />
   <v-container class="d-flex justify-center align-center fill-height">
     <v-card class="pa-5 fill-card">
       <v-card-title class="text-h5 text-center">Login</v-card-title>
@@ -17,7 +18,7 @@
               required
               full-width
           ></v-text-field>
-          <v-btn color="primary" type="submit" class="mt-4" block>Login</v-btn>
+          <v-btn type="submit" class="mt-4 custom-btn" block>Login</v-btn>
         </v-form>
       </v-card-text>
     </v-card>
@@ -26,8 +27,10 @@
 
 <script>
 import {AuthService} from "@/services/AuthService";
+import AppToolBar from "@/components/AppToolBar.vue";
 
 export default {
+  components: {AppToolBar},
   data() {
     return {
       identifier: '',
@@ -57,13 +60,11 @@ export default {
   width: 100%;
   max-width: 600px;
   box-sizing: border-box;
+  background-color: #222021;
+  color: #d5dad9;
 }
-
-.v-container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+.custom-btn {
+  color: #222021;
+  background-color: #d5dad9;
 }
 </style>
