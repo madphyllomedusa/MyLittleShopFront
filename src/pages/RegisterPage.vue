@@ -44,7 +44,9 @@ import {AuthService} from "@/services/AuthService";
 import AppToolBar from "@/components/AppToolBar.vue";
 
 export default {
-  components: {AppToolBar},
+  components: {
+    AppToolBar
+  },
   data() {
     return {
       username: '',

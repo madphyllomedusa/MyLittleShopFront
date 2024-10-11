@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import AppToolBar from '@/components/AppToolBar.vue';
+import AppToolBar from "@/components/AppToolBar.vue";
 </script>
 
 <style scoped>

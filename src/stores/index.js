@@ -12,6 +12,7 @@ const store = createStore({
         },
         logout(state) {
             state.isAuthenticated = false;
+            console.log("User " + state.identifier + " logged out");
             state.identifier = '';
         }
     }
