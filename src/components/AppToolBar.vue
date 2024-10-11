@@ -1,7 +1,7 @@
 <template>
   <v-toolbar app class="toolbar">
     <v-toolbar-title>
-      <v-img class="logo mr-3" :src="require('@/assets/logo-logo.png')" ></v-img>
+      <v-img class="logo mr-3" :src="require('@/assets/logo-logo.png')" v-on:click="toMain"></v-img>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>
@@ -22,7 +22,11 @@
       <v-btn text v-if="!isAuthenticated" to="/auth/login">Login</v-btn>
       <v-btn text v-if="!isAuthenticated" to="/auth/register">Register</v-btn>
 
-      <v-btn text v-else @click="logout">{{ identifier }}</v-btn>
+      <v-btn v-else @click="toMain">{{ identifier }}</v-btn>
+
+      <v-btn v-if="isAuthenticated" @click="logout">
+        <v-icon right>mdi-export</v-icon>
+      </v-btn>
     </v-toolbar-items>
   </v-toolbar>
 </template>
@@ -37,7 +41,6 @@ const router = useRouter();
 
 const searchQuery = ref('');
 
-// Авторизация
 const isAuthenticated = computed(() => store.state.isAuthenticated);
 const identifier = computed(() => store.state.identifier);
 
@@ -45,13 +48,16 @@ const logout = () => {
   store.commit('logout');
   router.push('/');
 };
+const toMain=()=>{
+  router.push('/');
+};
 </script>
 
 <style scoped>
 .logo {
-  height: 100%;  /* Логотип будет занимать всю высоту тулбара */
-  width: auto;   /* Ширина будет подстраиваться под пропорции изображения */
-  max-height: 64px; /* Ограничение максимальной высоты тулбара (можно менять по необходимости) */
+  height: auto;
+  width: auto;
+  max-height: 64px;
 }
 
 .mr-3 {
