@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar app class="toolbar">
+  <v-toolbar height="60"  flat app class="toolbar">
     <v-toolbar-title>
       <v-img class="logo mr-3" :src="require('@/assets/logo-logo.png')" v-on:click="toMain"></v-img>
     </v-toolbar-title>
@@ -57,11 +57,6 @@ const toMain=()=>{
 .logo {
   height: auto;
   width: auto;
-  max-height: 64px;
-}
-
-.mr-3 {
-  margin-right: 5px;
 }
 
 .toolbar {
