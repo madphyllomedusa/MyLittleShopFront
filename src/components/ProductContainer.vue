@@ -2,11 +2,26 @@
   <div class="product-container">
     <v-container>
       <v-row>
-        <v-col v-for="product in products" :key="product.name" cols="12" md="4">
+        <v-col
+          v-for="product in products"
+          :key="product.name"
+          cols="12"
+          md="4"
+        >
           <v-card>
-            <v-carousel v-if="product.imageUrls && product.imageUrls.length > 0" hide-delimiters height="300">
-              <v-carousel-item v-for="(image, index) in product.imageUrls" :key="index">
-                <v-img :src="image" height="300px"></v-img>
+            <v-carousel
+              v-if="product.imageUrls && product.imageUrls.length > 0"
+              hide-delimiters
+              height="300"
+            >
+              <v-carousel-item
+                v-for="(image, index) in product.imageUrls"
+                :key="index"
+              >
+                <v-img
+                  :src="image"
+                  height="300px"
+                />
               </v-carousel-item>
             </v-carousel>
 
@@ -15,12 +30,17 @@
             <v-card-text>{{ product.description }}</v-card-text>
 
             <v-list>
-              <v-list-item v-for="(value, key) in getRenamedParameters(product)" :key="key">
+              <v-list-item
+                v-for="(value, key) in getRenamedParameters(product)"
+                :key="key"
+              >
                 <span>{{ key }}: {{ value }}</span>
               </v-list-item>
             </v-list>
 
-            <v-card-subtitle class="price">{{ product.price }} ₽</v-card-subtitle>
+            <v-card-subtitle class="price">
+              {{ product.price }} ₽
+            </v-card-subtitle>
           </v-card>
         </v-col>
       </v-row>

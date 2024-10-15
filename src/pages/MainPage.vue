@@ -1,7 +1,7 @@
 <template>
   <div>
     <AppToolBar />
-    <CategoryAppBar/>
+    <CategoryAppBar />
   </div>
 </template>
 

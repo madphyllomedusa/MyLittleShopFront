@@ -2,37 +2,48 @@
   <AppToolBar />
   <v-container class="d-flex justify-center align-center fill-height">
     <v-card class="pa-5 fill-card ">
-      <v-card-title class="text-h5 text-center">Register</v-card-title>
+      <v-card-title class="text-h5 text-center">
+        Register
+      </v-card-title>
       <v-card-text>
-        <v-form class="custom-form" @submit.prevent="register">
+        <v-form
+          class="custom-form"
+          @submit.prevent="register"
+        >
           <v-text-field
-              v-model="username"
-              label="Username"
-              required
-              full-width
-          ></v-text-field>
+            v-model="username"
+            label="Username"
+            required
+            full-width
+          />
           <v-text-field
-              v-model="email"
-              label="Email"
-              type="email"
-              required
-              full-width
-          ></v-text-field>
+            v-model="email"
+            label="Email"
+            type="email"
+            required
+            full-width
+          />
           <v-text-field
-              v-model="password"
-              label="Password"
-              type="password"
-              required
-              full-width
-          ></v-text-field>
+            v-model="password"
+            label="Password"
+            type="password"
+            required
+            full-width
+          />
           <v-text-field
-              v-model="matchingPassword"
-              label="Confirm Password"
-              type="password"
-              required
-              full-width
-          ></v-text-field>
-          <v-btn type="submit" class="mt-4 custom-btn" block>Register</v-btn>
+            v-model="matchingPassword"
+            label="Confirm Password"
+            type="password"
+            required
+            full-width
+          />
+          <v-btn
+            type="submit"
+            class="mt-4 custom-btn"
+            block
+          >
+            Register
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>

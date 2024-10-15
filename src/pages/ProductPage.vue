@@ -1,7 +1,6 @@
 <template>
-  <AppToolBar/>
-  <CategoryAppbar/>
-  <h1>huy</h1>
+  <AppToolBar />
+  <CategoryAppbar />
 </template>
 
 

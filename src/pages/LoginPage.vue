@@ -2,23 +2,31 @@
   <AppToolBar />
   <v-container class="d-flex justify-center align-center fill-height">
     <v-card class="pa-5 fill-card">
-      <v-card-title class="text-h5 text-center">Login</v-card-title>
+      <v-card-title class="text-h5 text-center">
+        Login
+      </v-card-title>
       <v-card-text>
         <v-form @submit.prevent="login">
           <v-text-field
-              v-model="identifier"
-              label="Identifier (Email or Username)"
-              required
-              full-width
-          ></v-text-field>
+            v-model="identifier"
+            label="Identifier (Email or Username)"
+            required
+            full-width
+          />
           <v-text-field
-              v-model="password"
-              label="Password"
-              type="password"
-              required
-              full-width
-          ></v-text-field>
-          <v-btn type="submit" class="mt-4 custom-btn" block>Login</v-btn>
+            v-model="password"
+            label="Password"
+            type="password"
+            required
+            full-width
+          />
+          <v-btn
+            type="submit"
+            class="mt-4 custom-btn"
+            block
+          >
+            Login
+          </v-btn>
         </v-form>
       </v-card-text>
     </v-card>

@@ -1,31 +1,62 @@
 <template>
-  <v-toolbar height="60"  flat app class="toolbar">
+  <v-toolbar
+    height="60"
+    flat
+    app
+    class="toolbar"
+  >
     <v-toolbar-title>
-      <v-img class="logo mr-3" :src="require('@/assets/logo-logo.png')" v-on:click="toMain"></v-img>
+      <v-img
+        class="logo mr-3"
+        :src="require('@/assets/logo-logo.png')"
+        @click="toMain"
+      />
     </v-toolbar-title>
 
-    <v-spacer></v-spacer>
+    <v-spacer />
 
     <v-text-field
-        v-model="searchQuery"
-        placeholder="Search for products"
-        variant="outlined"
-        append-inner-icon="mdi-magnify"
-        single-line
-        hide-details
-        class="search-field"
-    ></v-text-field>
+      v-model="searchQuery"
+      placeholder="Search for products"
+      variant="outlined"
+      append-inner-icon="mdi-magnify"
+      single-line
+      hide-details
+      class="search-field"
+    />
 
-    <v-spacer></v-spacer>
+    <v-spacer />
 
     <v-toolbar-items>
-      <v-btn text v-if="!isAuthenticated" to="/auth/login">Login</v-btn>
-      <v-btn text v-if="!isAuthenticated" to="/auth/register">Register</v-btn>
+      <v-btn
+        v-if="!isAuthenticated"
+        text
+        to="/auth/login"
+      >
+        Login
+      </v-btn>
+      <v-btn
+        v-if="!isAuthenticated"
+        text
+        to="/auth/register"
+      >
+        Register
+      </v-btn>
 
-      <v-btn v-else @click="toMain">{{ identifier }}</v-btn>
+      <v-btn
+        v-else
+        @click="toMain"
+      >
+        {{ identifier }}
+      </v-btn>
 
-      <v-btn v-if="isAuthenticated" @click="logout">
-        <v-icon right>mdi-export</v-icon>
+      <v-btn
+        v-if="isAuthenticated"
+        @click="logout"
+      >
+        <v-icon right>
+          mdi-export
+        </v-icon>
       </v-btn>
     </v-toolbar-items>
   </v-toolbar>
