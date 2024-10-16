@@ -1,4 +1,6 @@
 <template>
+  <AppToolBar/>
+  <CategoryAppBar/>
   <div class="product-container">
     <v-container>
       <v-row>
@@ -30,14 +32,10 @@
             <v-card-text>{{ product.description }}</v-card-text>
 
             <v-list>
-              <v-list-item
-                v-for="(value, key) in getRenamedParameters(product)"
-                :key="key"
-              >
+              <v-list-item v-for="(value, key) in product.parameters" :key="key">
                 <span>{{ key }}: {{ value }}</span>
               </v-list-item>
             </v-list>
-
             <v-card-subtitle class="price">
               {{ product.price }} ₽
             </v-card-subtitle>
@@ -50,9 +48,12 @@
 
 <script>
 import ProductService from '@/services/ProductService';
+import AppToolBar from "@/components/AppToolBar.vue";
+import CategoryAppBar from "@/components/CategoryAppBar.vue";
 
 export default {
   name: 'ProductContainer',
+  components: {CategoryAppBar, AppToolBar},
   props: {
     categoryId: {
       type: Number,
@@ -62,38 +63,29 @@ export default {
   data() {
     return {
       products: [], // Инициализация массива продуктов
-      renamedParameters: {
-        model: 'Модель',
-        color: 'Цвет',
-        storageCapacity: 'Объем памяти',
-        // Добавьте любые другие параметры, которые необходимо переименовать
-      },
+
     };
   },
   watch: {
     categoryId: {
       immediate: true,
       handler(newCategoryId) {
-        this.fetchProducts(newCategoryId);
+        if (newCategoryId) {
+          this.fetchProducts(newCategoryId);
+        } else {
+          console.warn('categoryId is missing or invalid:', newCategoryId);
+        }
       },
     },
   },
   methods: {
     async fetchProducts(categoryId) {
       try {
-        this.products = await ProductService.getProductsByCategory(categoryId);
+        const products = await ProductService.getProductsByCategory(categoryId);
+        this.products = products;
       } catch (error) {
         console.error('Failed to fetch products:', error);
       }
-    },
-    getRenamedParameters(product) {
-      // Метод принимает продукт как аргумент
-      const renamedParams = {};
-      for (const [key, value] of Object.entries(product.parameters)) {
-        const renamedKey = this.renamedParameters[key] || key;
-        renamedParams[renamedKey] = value;
-      }
-      return renamedParams;
     },
   },
 };
@@ -104,9 +96,6 @@ export default {
   margin-top: 20px;
 }
 
-.v-card {
-  margin-bottom: 20px;
-}
 
 .price {
   font-size: 24px; /* Сделаем цену больше */

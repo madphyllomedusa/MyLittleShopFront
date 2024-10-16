@@ -11,6 +11,15 @@ export default {
             throw error;
         }
     },
+    async getAllProducts() {
+        try {
+            const response = await axios.get('/products/');
+            return response.data;
+        } catch (error) {
+            console.error('Failed to fetch categories:', error);
+            throw error;
+        }
+    },
     async getCategoryChildren(categoryId) {
         try {
             const response = await axios.get(`/categories/${categoryId}/children`);
@@ -22,7 +31,7 @@ export default {
     },
     async getProductsByCategory(categoryId) {
         try {
-            const response = await axios.get(`http://localhost:8080/products/category/${categoryId}`, {
+            const response = await axios.get(`/products/category/${categoryId}`, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

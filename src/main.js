@@ -3,9 +3,9 @@ import App from './App.vue'
 import router from './router'; // Импорт роутера
 import store from './stores';
 import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
+import 'vuetify/styles'
+import '@mdi/font/css/materialdesignicons.css'
 
-loadFonts()
 
 createApp(App)
     .use(vuetify)
