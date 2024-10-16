@@ -2,9 +2,16 @@
   <div
     class="category-item"
     @mouseenter="handleHover"
+    @mouseleave="handleMouseLeave"
     @click="selectCategory"
   >
     {{ category.title }}
+    <v-icon v-if="!isOpen">
+      mdi-menu-down
+    </v-icon>
+    <v-icon v-else>
+      mdi-menu-up
+    </v-icon>
     <div
       v-if="children && isOpen"
       class="subcategory-list"
@@ -19,6 +26,7 @@
     </div>
   </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';
@@ -36,7 +44,6 @@ const props = defineProps({
 
 const emit = defineEmits(['select-category']);
 
-// Локальное состояние для хранения подкатегорий
 const children = ref([]);
 const isOpen = ref(false);
 
@@ -46,6 +53,10 @@ const handleHover = async () => {
     children.value = fetchedChildren;
   }
   isOpen.value = true;
+};
+
+const handleMouseLeave = () => {
+  isOpen.value = false;
 };
 
 const selectCategory = () => {

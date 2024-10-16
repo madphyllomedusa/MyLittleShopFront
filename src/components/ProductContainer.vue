@@ -1,6 +1,6 @@
 <template>
   <AppToolBar />
-  <CategoryAppBar />
+  <CategoryAppBar/>
   <div class="product-container">
     <v-container>
       <v-row>
@@ -53,6 +53,7 @@
 import ProductService from '@/services/ProductService';
 import AppToolBar from "@/components/AppToolBar.vue";
 import CategoryAppBar from "@/components/CategoryAppBar.vue";
+//import CategoryAppBar from "@/components/CategoryAppBar.vue";
 
 export default {
   name: 'ProductContainer',
