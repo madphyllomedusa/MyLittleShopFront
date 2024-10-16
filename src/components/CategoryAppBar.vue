@@ -1,26 +1,26 @@
 <template>
   <v-toolbar
-      height="50"
-      flat
-      class="toolbar"
+    height="50"
+    flat
+    class="toolbar"
   >
     <div v-if="mainCategories.length === 0">
       Нет доступных категорий
     </div>
     <v-list>
       <CategoryMenu
-          v-for="category in mainCategories"
-          :key="category.id"
-          :category="category"
-          :fetch-children="fetchCategoryChildren"
-          @select-category="handleCategorySelect"
+        v-for="category in mainCategories"
+        :key="category.id"
+        :category="category"
+        :fetch-children="fetchCategoryChildren"
+        @select-category="handleCategorySelect"
       />
     </v-list>
   </v-toolbar>
   <!-- Убедитесь, что ProductContainer получает categoryId как prop -->
   <ProductContainer
-      v-if="selectedCategory"
-      :category-id="selectedCategory.id"
+    v-if="selectedCategory"
+    :category-id="selectedCategory.id"
   />
 </template>
 

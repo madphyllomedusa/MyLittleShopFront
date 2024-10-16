@@ -1,6 +1,6 @@
 <template>
-  <AppToolBar/>
-  <CategoryAppBar/>
+  <AppToolBar />
+  <CategoryAppBar />
   <div class="product-container">
     <v-container>
       <v-row>
@@ -32,7 +32,10 @@
             <v-card-text>{{ product.description }}</v-card-text>
 
             <v-list>
-              <v-list-item v-for="(value, key) in product.parameters" :key="key">
+              <v-list-item
+                v-for="(value, key) in product.parameters"
+                :key="key"
+              >
                 <span>{{ key }}: {{ value }}</span>
               </v-list-item>
             </v-list>

@@ -1,17 +1,20 @@
 <template>
   <div
-      class="category-item"
-      @mouseenter="handleHover"
-      @click="selectCategory"
+    class="category-item"
+    @mouseenter="handleHover"
+    @click="selectCategory"
   >
     {{ category.title }}
-    <div v-if="children && isOpen" class="subcategory-list">
+    <div
+      v-if="children && isOpen"
+      class="subcategory-list"
+    >
       <CategoryMenu
-          v-for="child in children"
-          :key="child.id"
-          :category="child"
-          :fetch-children="fetchChildren"
-          @select-category="$emit('select-category', $event)"
+        v-for="child in children"
+        :key="child.id"
+        :category="child"
+        :fetch-children="fetchChildren"
+        @select-category="$emit('select-category', $event)"
       />
     </div>
   </div>
