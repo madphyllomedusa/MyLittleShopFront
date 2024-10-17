@@ -1,9 +1,9 @@
 <template>
   <div
-    class="category-item"
-    @mouseenter="handleHover"
-    @mouseleave="handleMouseLeave"
-    @click="selectCategory"
+      class="category-item"
+      @mouseenter="handleHover"
+      @mouseleave="handleMouseLeave"
+      @click="selectCategory"
   >
     {{ category.title }}
     <v-icon v-if="!isOpen">
@@ -13,20 +13,19 @@
       mdi-menu-up
     </v-icon>
     <div
-      v-if="children && isOpen"
-      class="subcategory-list"
+        v-if="children && isOpen"
+        class="subcategory-list"
     >
       <CategoryMenu
-        v-for="child in children"
-        :key="child.id"
-        :category="child"
-        :fetch-children="fetchChildren"
-        @select-category="$emit('select-category', $event)"
+          v-for="child in children"
+          :key="child.id"
+          :category="child"
+          :fetch-children="fetchChildren"
+          @select-category="$emit('select-category', $event)"
       />
     </div>
   </div>
 </template>
-
 
 <script setup>
 import { ref } from 'vue';
@@ -60,7 +59,7 @@ const handleMouseLeave = () => {
 };
 
 const selectCategory = () => {
-  emit('select-category', props.category);
+  emit('select-category', props.category);  // Эмитим выбранную категорию или подкатегорию
 };
 </script>
 

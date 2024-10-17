@@ -1,59 +1,65 @@
 <template>
-  <v-toolbar
-    height="auto"
-    flat
-    class="toolbar"
-  >
-    <div v-if="mainCategories.length === 0">
-      Нет доступных категорий
-    </div>
-    <v-list>
-      <CategoryMenu
+  <v-toolbar flat class="toolbar">
+    <div
         v-for="category in mainCategories"
         :key="category.id"
-        :category="category"
-        :fetch-children="fetchCategoryChildren"
-        @select-category="handleCategorySelect"
-      />
-    </v-list>
+        class="toolbar-item"
+    >
+      <v-btn
+          text
+          @mouseenter="(event) => openSubcategoryMenu(category, event)"
+          @mouseleave="closeSubcategoryMenu"
+      >
+        {{ category.title }}
+      </v-btn>
+    </div>
+
+    <v-menu
+        v-model="isSubcategoryOpen"
+        :activator="activator"
+        absolute
+        offset-y
+        :close-on-content-click="false"
+        v-if="subcategories.length > 0"
+        @mouseenter="keepMenuOpen"
+        @mouseleave="closeSubcategoryMenu"
+    >
+      <v-list>
+        <CategoryMenu
+            v-for="subcategory in subcategories"
+            :key="subcategory.id"
+            :category="subcategory"
+            :fetch-children="fetchCategoryChildren"
+            @select-category="selectSubcategory"
+        />
+      </v-list>
+    </v-menu>
   </v-toolbar>
-  <!-- Убедитесь, что ProductContainer получает categoryId как prop -->
-  <ProductContainer
-    v-if="selectedCategory"
-    :category-id="selectedCategory.id"
-  />
 </template>
 
 <script>
+import CategoryMenu from './CategoryMenu.vue';
 import ProductService from '@/services/ProductService';
-import ProductContainer from '@/components/ProductContainer.vue';
-import CategoryMenu from '@/components/CategoryMenu.vue';
 
 export default {
-  name: 'CategoryAppBar',
   components: {
-    ProductContainer,
     CategoryMenu,
   },
   data() {
     return {
-      allCategories: [],
       mainCategories: [],
-      selectedCategory: null,
+      subcategories: [],
+      isSubcategoryOpen: false,
+      activator: null,
     };
   },
   async mounted() {
-    try {
-      await this.fetchCategories();
-    } catch (error) {
-      console.error('Не удалось загрузить категории:', error);
-    }
+    await this.fetchCategories();
   },
   methods: {
     async fetchCategories() {
       try {
         const categories = await ProductService.getAllCategories();
-        this.allCategories = categories;
         this.mainCategories = categories.filter(category => category.parentId === 0);
       } catch (error) {
         console.error('Ошибка при получении категорий:', error);
@@ -62,25 +68,33 @@ export default {
     async fetchCategoryChildren(categoryId) {
       try {
         const children = await ProductService.getCategoryChildren(categoryId);
-        if (children.length === 0) {
-          console.log(`No children found for category ID: ${categoryId}`);
-          return [];
-        }
         return children;
       } catch (error) {
         console.error(`Не удалось загрузить подкатегории для категории ID ${categoryId}:`, error);
         return [];
       }
     },
-    async handleCategorySelect(category) {
-      this.selectedCategory = category;
-
-      // Переход на страницу продуктов категории
-      this.$router.push(`/products/category/${category.id}`).catch(err => {
-        if (err.name !== 'NavigationDuplicated') {
-          console.error('Navigation error:', err);
-        }
-      });
+    async openSubcategoryMenu(category, event) {
+      this.activator = event.target;
+      try {
+        const children = await this.fetchCategoryChildren(category.id);
+        this.subcategories = children;
+        this.isSubcategoryOpen = true;
+      } catch (error) {
+        console.error('Ошибка при загрузке подкатегорий:', error.message);
+      }
+    },
+    closeSubcategoryMenu() {
+      this.isSubcategoryOpen = false;
+      this.subcategories = [];
+    },
+    keepMenuOpen() {
+      this.isSubcategoryOpen = true;
+    },
+    selectSubcategory(subcategory) {
+      this.isSubcategoryOpen = false;
+      // Переход по выбранной подкатегории
+      this.$router.push(`/products/category/${subcategory.id}`);
     },
   },
 };
@@ -90,17 +104,10 @@ export default {
 .toolbar {
   background-color: #222021;
   color: #d5dad9;
-  height: 50px;
-  position: relative;
-  overflow: visible;
 }
 
-.category-list {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-
+.toolbar-item {
+  margin-right: 20px;
+  position: relative;
 }
 </style>
