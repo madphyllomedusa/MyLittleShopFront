@@ -1,6 +1,6 @@
 <template>
   <v-toolbar
-    height="50"
+    height="auto"
     flat
     class="toolbar"
   >
@@ -90,5 +90,17 @@ export default {
 .toolbar {
   background-color: #222021;
   color: #d5dad9;
+  height: 50px;
+  position: relative;
+  overflow: visible;
+}
+
+.category-list {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
 }
 </style>

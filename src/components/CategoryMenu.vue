@@ -69,6 +69,7 @@ const selectCategory = () => {
   cursor: pointer;
   padding: 5px;
 }
+
 .subcategory-list {
   margin-left: 20px;
 }

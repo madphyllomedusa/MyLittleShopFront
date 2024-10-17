@@ -11,4 +11,8 @@ import CategoryAppBar from "@/components/CategoryAppBar.vue";
 </script>
 
 <style scoped>
+.toolbar {
+  background-color: #222021;
+  color: #d5dad9;
+}
 </style>
