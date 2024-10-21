@@ -1,6 +1,6 @@
 <template>
   <AppToolBar />
-  <CategoryAppBar/>
+  <CategoryAppBar />
   <div class="product-container">
     <v-container>
       <v-row>

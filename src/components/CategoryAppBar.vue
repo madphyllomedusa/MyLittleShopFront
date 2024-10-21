@@ -51,6 +51,7 @@ export default {
       subcategories: [],
       isSubcategoryOpen: false,
       activator: null,
+      closeTimeout: null, // Добавлено
     };
   },
   async mounted() {
@@ -75,6 +76,10 @@ export default {
       }
     },
     async openSubcategoryMenu(category, event) {
+      if (this.closeTimeout) {
+        clearTimeout(this.closeTimeout);
+        this.closeTimeout = null;
+      }
       this.activator = event.target;
       try {
         const children = await this.fetchCategoryChildren(category.id);
@@ -85,10 +90,20 @@ export default {
       }
     },
     closeSubcategoryMenu() {
-      this.isSubcategoryOpen = false;
-      this.subcategories = [];
+      if (this.closeTimeout) {
+        return;
+      }
+      this.closeTimeout = setTimeout(() => {
+        this.isSubcategoryOpen = false;
+        this.subcategories = [];
+        this.closeTimeout = null;
+      }, 200); // Задержка 200ms
     },
     keepMenuOpen() {
+      if (this.closeTimeout) {
+        clearTimeout(this.closeTimeout);
+        this.closeTimeout = null;
+      }
       this.isSubcategoryOpen = true;
     },
     selectSubcategory(subcategory) {
@@ -109,5 +124,9 @@ export default {
 .toolbar-item {
   margin-right: 20px;
   position: relative;
+}
+
+.v-menu__content {
+  margin-top: 0;
 }
 </style>

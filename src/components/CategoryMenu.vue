@@ -3,27 +3,27 @@
       class="category-item"
       @mouseenter="handleHover"
       @mouseleave="handleMouseLeave"
-      @click="selectCategory"
+      @click.stop="selectCategory"
   >
-    {{ category.title }}
-    <v-icon v-if="!isOpen">
-      mdi-menu-down
-    </v-icon>
-    <v-icon v-else>
-      mdi-menu-up
-    </v-icon>
-    <div
-        v-if="children && isOpen"
-        class="subcategory-list"
-    >
-      <CategoryMenu
-          v-for="child in children"
-          :key="child.id"
-          :category="child"
-          :fetch-children="fetchChildren"
-          @select-category="$emit('select-category', $event)"
-      />
-    </div>
+  {{ category.title }}
+  <v-icon v-if="!isOpen">
+    mdi-menu-down
+  </v-icon>
+  <v-icon v-else>
+    mdi-menu-up
+  </v-icon>
+  <div
+      v-if="children && isOpen"
+      class="subcategory-list"
+  >
+    <CategoryMenu
+        v-for="child in children"
+        :key="child.id"
+        :category="child"
+        :fetch-children="fetchChildren"
+        @select-category="$emit('select-category', $event)"
+    />
+  </div>
   </div>
 </template>
 
@@ -59,7 +59,7 @@ const handleMouseLeave = () => {
 };
 
 const selectCategory = () => {
-  emit('select-category', props.category);  // Эмитим выбранную категорию или подкатегорию
+  emit('select-category', props.category); // Эмитим выбранную категорию или подкатегорию
 };
 </script>
 
