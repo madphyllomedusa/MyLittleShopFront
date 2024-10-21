@@ -15,10 +15,7 @@ module.exports = defineConfig({
         port: 5173,
         open: false,
         client: {
-            overlay: {
-                warnings: false,
-                errors: false
-            }
+            overlay: false,
         }
     },
     configureWebpack: {

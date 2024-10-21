@@ -1,36 +1,39 @@
 <template>
-  <v-toolbar flat class="toolbar">
+  <v-toolbar
+    flat
+    class="toolbar"
+  >
     <div
-        v-for="category in mainCategories"
-        :key="category.id"
-        class="toolbar-item"
+      v-for="category in mainCategories"
+      :key="category.id"
+      class="toolbar-item"
     >
       <v-btn
-          text
-          @mouseenter="(event) => openSubcategoryMenu(category, event)"
-          @mouseleave="closeSubcategoryMenu"
+        text
+        @mouseenter="(event) => openSubcategoryMenu(category, event)"
+        @mouseleave="closeSubcategoryMenu"
       >
         {{ category.title }}
       </v-btn>
     </div>
 
     <v-menu
-        v-model="isSubcategoryOpen"
-        :activator="activator"
-        absolute
-        offset-y
-        :close-on-content-click="false"
-        v-if="subcategories.length > 0"
-        @mouseenter="keepMenuOpen"
-        @mouseleave="closeSubcategoryMenu"
+      v-if="subcategories.length > 0"
+      v-model="isSubcategoryOpen"
+      :activator="activator"
+      absolute
+      offset-y
+      :close-on-content-click="false"
+      @mouseenter="keepMenuOpen"
+      @mouseleave="closeSubcategoryMenu"
     >
       <v-list>
         <CategoryMenu
-            v-for="subcategory in subcategories"
-            :key="subcategory.id"
-            :category="subcategory"
-            :fetch-children="fetchCategoryChildren"
-            @select-category="selectSubcategory"
+          v-for="subcategory in subcategories"
+          :key="subcategory.id"
+          :category="subcategory"
+          :fetch-children="fetchCategoryChildren"
+          @select-category="selectSubcategory"
         />
       </v-list>
     </v-menu>

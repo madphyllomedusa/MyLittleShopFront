@@ -1,29 +1,29 @@
 <template>
   <div
-      class="category-item"
-      @mouseenter="handleHover"
-      @mouseleave="handleMouseLeave"
-      @click.stop="selectCategory"
+    class="category-item"
+    @mouseenter="handleHover"
+    @mouseleave="handleMouseLeave"
+    @click.stop="selectCategory"
   >
-  {{ category.title }}
-  <v-icon v-if="!isOpen">
-    mdi-menu-down
-  </v-icon>
-  <v-icon v-else>
-    mdi-menu-up
-  </v-icon>
-  <div
+    {{ category.title }}
+    <v-icon v-if="!isOpen">
+      mdi-menu-down
+    </v-icon>
+    <v-icon v-else>
+      mdi-menu-up
+    </v-icon>
+    <div
       v-if="children && isOpen"
       class="subcategory-list"
-  >
-    <CategoryMenu
+    >
+      <CategoryMenu
         v-for="child in children"
         :key="child.id"
         :category="child"
         :fetch-children="fetchChildren"
         @select-category="$emit('select-category', $event)"
-    />
-  </div>
+      />
+    </div>
   </div>
 </template>
 
@@ -70,6 +70,9 @@ const selectCategory = () => {
 }
 
 .subcategory-list {
-  margin-left: 20px;
+  left: 100%;
+  top: 0;
+  margin-left: 10px;
+  z-index: 1000;
 }
 </style>
